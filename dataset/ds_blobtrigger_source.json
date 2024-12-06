@@ -1,0 +1,32 @@
+{
+	"name": "ds_blobtrigger_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blobtrigger_source",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_name_ds": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().file_name_ds",
+					"type": "Expression"
+				},
+				"container": "asfsessiontest"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

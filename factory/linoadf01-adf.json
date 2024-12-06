@@ -1,0 +1,9 @@
+{
+	"name": "linoadf01-adf",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d1b7acad-d11e-4f85-bf9d-4d0af1be5b00",
+		"tenantId": "b6f5a826-d567-4237-8a71-76602c7bac37"
+	}
+}

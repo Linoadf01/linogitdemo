@@ -1,0 +1,50 @@
+{
+	"name": "sourcesort",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_employees_source_sort",
+						"type": "DatasetReference"
+					},
+					"name": "sourcesortemp"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "emp_dept_data",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "empsort"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EMPNO as string,",
+				"          ENAME as string,",
+				"          JOB as string,",
+				"          MGR as string,",
+				"          SAL as integer,",
+				"          COMM as string,",
+				"          DEPTNO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcesortemp",
+				"sourcesortemp sort(desc(SAL, true)) ~> empsort",
+				"empsort sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

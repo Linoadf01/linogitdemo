@@ -1,0 +1,95 @@
+{
+	"name": "conditionalsplit",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_emp_source",
+						"type": "DatasetReference"
+					},
+					"name": "conditionalsplit"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dest",
+						"type": "DatasetReference"
+					},
+					"name": "research"
+				},
+				{
+					"dataset": {
+						"referenceName": "dest",
+						"type": "DatasetReference"
+					},
+					"name": "accounting"
+				},
+				{
+					"dataset": {
+						"referenceName": "dest",
+						"type": "DatasetReference"
+					},
+					"name": "operation"
+				},
+				{
+					"dataset": {
+						"referenceName": "dest",
+						"type": "DatasetReference"
+					},
+					"name": "Sales"
+				}
+			],
+			"transformations": [
+				{
+					"name": "conditionalsplita"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EMPNO as string,",
+				"          ENAME as string,",
+				"          JOB as string,",
+				"          MGR as string,",
+				"          SAL as string,",
+				"          COMM as string,",
+				"          DEPTNO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> conditionalsplit",
+				"conditionalsplit split(equals(DEPTNO, '10'),",
+				"     equals(DEPTNO, '20'),",
+				"     equals(DEPTNO, '30'),",
+				"     equals(DEPTNO, '40'),",
+				"     disjoint: false) ~> conditionalsplita@(ACCOUNTING, RESEARCH, SALES, OPERATIONS)",
+				"conditionalsplita@RESEARCH sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Research'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> research",
+				"conditionalsplita@ACCOUNTING sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Accounting'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> accounting",
+				"conditionalsplita@OPERATIONS sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Operations'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> operation",
+				"conditionalsplita@SALES sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Sales'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> Sales"
+			]
+		}
+	}
+}

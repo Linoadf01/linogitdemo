@@ -1,0 +1,51 @@
+{
+	"name": "dest_linodemo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dest_linodemo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EMPNO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ENAME",
+				"type": "varchar"
+			},
+			{
+				"name": "JOB",
+				"type": "varchar"
+			},
+			{
+				"name": "MGR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SAL",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COMM",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DEPTNO",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "employees"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

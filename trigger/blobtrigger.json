@@ -1,0 +1,27 @@
+{
+	"name": "blobtrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_stroage_blob_trigger",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"file_name": "@triggerBody().fileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/asfsessiontest/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/8b5f613e-5867-4a25-9c67-a87f386d21f7/resourceGroups/datafactory-rg22/providers/Microsoft.Storage/storageAccounts/stroagesessiontest",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

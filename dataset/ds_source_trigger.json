@@ -1,0 +1,51 @@
+{
+	"name": "ds_source_trigger",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_source_trigger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Employees.xlsx",
+				"container": "sacontainerdemo"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "EMPNO",
+				"type": "String"
+			},
+			{
+				"name": "ENAME",
+				"type": "String"
+			},
+			{
+				"name": "JOB",
+				"type": "String"
+			},
+			{
+				"name": "MGR",
+				"type": "String"
+			},
+			{
+				"name": "SAL",
+				"type": "String"
+			},
+			{
+				"name": "COMM",
+				"type": "String"
+			},
+			{
+				"name": "DEPTNO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

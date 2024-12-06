@@ -1,0 +1,35 @@
+{
+	"name": "ds_dept_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dept_source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Department.xlsx",
+				"container": "sacontainerdemo"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "DEPTNO",
+				"type": "String"
+			},
+			{
+				"name": "DNAME",
+				"type": "String"
+			},
+			{
+				"name": "LOC",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

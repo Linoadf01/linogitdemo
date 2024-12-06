@@ -1,0 +1,51 @@
+{
+	"name": "dfrank",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_employees_source_sort",
+						"type": "DatasetReference"
+					},
+					"name": "rank"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "emp_dept_data",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "rankemp"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EMPNO as string,",
+				"          ENAME as string,",
+				"          JOB as string,",
+				"          MGR as string,",
+				"          SAL as integer,",
+				"          COMM as string,",
+				"          DEPTNO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> rank",
+				"rank rank(desc(SAL, true),",
+				"     output(rank as long)) ~> rankemp",
+				"rankemp sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
