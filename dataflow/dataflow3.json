@@ -1,15 +1,15 @@
 {
-	"name": "dataflow1",
+	"name": "dataflow3",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_emp_source",
+						"referenceName": "DSSOURCEFILTER",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "FILTER"
 				}
 			],
 			"sinks": [
@@ -23,7 +23,7 @@
 			],
 			"transformations": [
 				{
-					"name": "emppartion"
+					"name": "EMPFILTER"
 				}
 			],
 			"scriptLines": [
@@ -38,11 +38,9 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 window(over(DEPTNO),",
-				"     desc(SAL, true),",
-				"     SALARY = avg(SAL)) ~> emppartion",
-				"emppartion sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> FILTER",
+				"FILTER filter(equals(DEPTNO, '20')) ~> EMPFILTER",
+				"EMPFILTER sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"

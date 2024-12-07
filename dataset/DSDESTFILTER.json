@@ -1,0 +1,22 @@
+{
+	"name": "DSDESTFILTER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSDESTFILTER",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "adfsession"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
